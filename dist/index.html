@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<div id="container"></div>
+<script src="bundle.js"></script>
+<script>
+
+	var chart = new d3Chart();
+
+	var el = document.getElementById("container");
+
+	var props = {
+		width: window.innerWidth - 50,
+		height: window.innerHeight,
+	};
+
+	var data = getData();
+
+	chart.create( el , props, data );
+
+	setTimeout( update, 1000 );
+
+	window.onresize = function(e) {
+		var props = {
+			width: window.innerWidth - 50,
+			height: window.innerHeight,
+		};
+
+		chart.resize( el, props, data );
+	}
+
+	function update() {
+		var props = {
+			width: window.innerWidth - 50,
+			height: window.innerHeight,
+			enableTransition: true,
+			duration: 1000
+		};
+		data = getUpdatedData();
+		chart.update( el, props, data );
+	}
+
+	function getData() {
+		return [
+			{ "label": "Item A",	"value": 492 },
+			{ "label": "Item B",	"value": 167 },
+			{ "label": "Item C",	"value": 999 },
+			{ "label": "Item D",	"value": 253 },
+		];
+	}
+
+	function getUpdatedData() {
+		return [
+			{ "label": "Item A",	"value": 100 },
+			{ "label": "Item B",	"value": 200 },
+			{ "label": "Item C",	"value": 300 },
+			{ "label": "Item D",	"value": 400 },
+		];
+	}
+
+</script>
